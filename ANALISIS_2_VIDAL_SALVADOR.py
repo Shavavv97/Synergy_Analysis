@@ -25,9 +25,10 @@ while not leave:
                 current_route = [route[2], route[3]]
                 if current_route not in counted_routes:
                     for movement in data:
-                        if current_route == [movement[2], movement[3]]:
-                            counter += 1
-                            sum_value += int(movement[9])
+                        if movement[1] == direction:
+                            if current_route == [movement[2], movement[3]]:
+                                counter += 1
+                                sum_value += int(movement[9])
                     average_value = sum_value / counter
 
                     counted_routes.append(current_route)
@@ -64,9 +65,10 @@ while not leave:
                 current_trasport = route[7]
                 if current_trasport not in counted_transport:
                     for movement in data:
-                        if current_trasport == movement[7]:
-                            counter += 1
-                            sum_value += int(movement[9])
+                        if movement[1] == direction:
+                            if current_trasport == movement[7]:
+                                counter += 1
+                                sum_value += int(movement[9])
                     average_value = sum_value / counter
 
                     counted_transport.append(current_trasport)
@@ -111,27 +113,30 @@ while not leave:
                     current_country = route[2]
                     if current_country not in counted_countries:
                         for movement in data:
-                            if current_country == movement[2]:
-                                counter += 1
-                                sum_value += int(movement[9])
-                        average_value = sum_value / counter
-
-                        counted_countries.append(current_country)
-                        exports_countries.append([route[2], counter, sum_value, round(average_value, 2), direction])
-                        counter = 0
-                        sum_value = 0  
+                            if movement[1] == direction:
+                                if current_country == movement[2]:
+                                    counter += 1
+                                    sum_value += int(movement[9])
+                        if counter != 0:
+                            average_value = sum_value / counter
+                            counted_countries.append(current_country)
+                            exports_countries.append([route[2], counter, sum_value, round(average_value, 2), direction])
+                            counter = 0
+                            sum_value = 0  
                 elif direction == 'Imports':
                     current_country = route[3]
                     if current_country not in counted_countries:
                         for movement in data:
-                            if current_country == movement[3]:
-                                counter += 1
-                                sum_value += int(movement[9])
-                        average_value = sum_value / counter
-                        counted_countries.append(current_country)
-                        imports_countries.append([route[3], counter, sum_value, round(average_value, 2), direction])
-                        counter = 0
-                        sum_value = 0
+                            if movement[1] == direction:
+                                if current_country == movement[3]:
+                                    counter += 1
+                                    sum_value += int(movement[9])
+                        if counter != 0:            
+                            average_value = sum_value / counter
+                            counted_countries.append(current_country)
+                            imports_countries.append([route[3], counter, sum_value, round(average_value, 2), direction])
+                            counter = 0
+                            sum_value = 0
 
         # Make a list of all the countries 
         countries = exports_countries + imports_countries                    
