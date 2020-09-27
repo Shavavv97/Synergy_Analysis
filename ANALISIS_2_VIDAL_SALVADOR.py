@@ -159,45 +159,46 @@ while not leave:
 
         # Find the exact percentage of the revenue of the countries list
         final_percent = round((stack * 100)/total_value, 2)
+        print('\nThe exact porcentange is', final_percent, 'percent.')
 
-        return sorted_countries, final_percent
+        return sorted_countries
 
     # print(value())
-    options = input('Please choose an option to show what you what to see: \n1-Top 10 routes.\n2-Bests transport modes.\n3-Countries that generates the 80 percent of the revenue\n4-Leave\n')
+    options = input('\n1-Top 10 routes.\n2-Bests transport modes.\n3-Countries that generates the 80 percent of the revenue\n4-Leave\nPlease choose an option to show what you what to see: ')
 
     if options == '1':
-        choice = input('Please select one direction\n1-Exportations\n2-Importations\n')
+        choice = input('1-Exportations\n2-Importations\nPlease select one direction: ')
         if choice == '1':
             data = routes('Exports')
             print('\n\nTop 10 routes are:\n')
             route_index = 1
             for i in range(len(data)):
-                print(route_index, '-', data[i][0], '-', data[i][1], 'with an average revenue per travel of $', data[i][4], 'using it' , data[i][2],'times, and with a total revenue of $', data[i][3],' \n')
+                print(route_index, '-', data[i][0], '-', data[i][1], 'with an average revenue per travel of $', data[i][4], 'traveling' , data[i][2],'times, and with a total revenue of $', data[i][3])
                 route_index += 1
         elif choice == '2':
             data = routes('Imports')
             print('\n\nTop 10 routes are:\n')
             route_index = 1
             for i in range(len(data)):
-                print(route_index, '-', data[i][0], '-', data[i][1], 'with an average revenue per travel of $', data[i][4], 'using it' , data[i][2],'times, and with a total revenue of $', data[i][3],' \n')
+                print(route_index, '-', data[i][0], '-', data[i][1], 'with an average revenue per travel of $', data[i][4], 'traveling' , data[i][2],'times, and with a total revenue of $', data[i][3])
                 route_index += 1
         else:
             print('You choose a wrong option\n')
     elif options == '2':
-        choice = input('Please select one direction\n1-Exportations\n2-Importations\n')
+        choice = input('1-Exportations\n2-Importations\nPlease select one direction: ')
         if choice == '1':
             data = transport('Exports')
             print('\n\nBest transport modes:\n')
             route_index = 1
             for i in range(len(data)):
-                print(route_index, '-', data[i][0], 'using it', data[i][1], 'times, and with an average revenue per travel of $', data[i][3], '\n')
+                print(route_index, '-', data[i][0], 'traveling', data[i][1], 'times, and with an average revenue per travel of $', data[i][3])
                 route_index += 1
         elif choice == '2':
             data = transport('Imports')
             print('\n\nBest transport modes:\n')
             route_index = 1
             for i in range(len(data)):
-                print(route_index, '-', data[i][0], 'using it', data[i][1], 'times, and with an average revenue per travel of $', data[i][3], '\n')
+                print(route_index, '-', data[i][0], 'traveling', data[i][1], 'times, and with an average revenue per travel of $', data[i][3])
                 route_index += 1
         else:
             print('You choose a wrong option\n')
@@ -206,10 +207,8 @@ while not leave:
         print('Countries that generates the 80 percent of the revenue: \n')
         route_index = 1
         for i in data:
-            for j in range(len(i)):
-                print(route_index, '-', i[j][0], 'being an', i[j][4], 'country, with an average revenue per travel of $', i[j][3], 'using it', i[j][1] , 'times and with a total revenue of $', i[j][2],'\n')
-                route_index += 1
-            break
+            print(route_index, '-', i[0], 'being an', i[4], 'country, with an average revenue per travel of $', i[3], 'traveling', i[1] , 'times and with a total revenue of $', i[2])
+            route_index += 1
     elif options == '4':
         leave = True
     else:
