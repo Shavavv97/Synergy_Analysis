@@ -81,8 +81,6 @@ while not leave:
                     transport_mode[j], transport_mode[j + 1] = transport_mode[j + 1], transport_mode[j]
         return transport_mode
 
-    # print(transport('Imports'))
-
     def value():
         data.pop(0)
         counter = 0
@@ -130,7 +128,6 @@ while not leave:
                                 counter += 1
                                 sum_value += int(movement[9])
                         average_value = sum_value / counter
-
                         counted_countries.append(current_country)
                         imports_countries.append([route[3], counter, sum_value, round(average_value, 2), direction])
                         counter = 0
@@ -163,9 +160,10 @@ while not leave:
 
         return sorted_countries
 
-    # print(value())
+    # Show a menu to choose what the user wants to do
     options = input('\n1-Top 10 routes.\n2-Bests transport modes.\n3-Countries that generates the 80 percent of the revenue\n4-Leave\nPlease choose an option to show what you what to see: ')
 
+    # Show the top 10 routes depending on the direction
     if options == '1':
         choice = input('1-Exportations\n2-Importations\nPlease select one direction: ')
         if choice == '1':
@@ -184,6 +182,8 @@ while not leave:
                 route_index += 1
         else:
             print('You choose a wrong option\n')
+    
+    # Show the bests transport modes depending on the direction
     elif options == '2':
         choice = input('1-Exportations\n2-Importations\nPlease select one direction: ')
         if choice == '1':
@@ -202,6 +202,8 @@ while not leave:
                 route_index += 1
         else:
             print('You choose a wrong option\n')
+
+    # Show the countries that generates the 80 percent of the total revenue
     elif options == '3':
         data = value()
         print('Countries that generates the 80 percent of the revenue: \n')
@@ -209,7 +211,10 @@ while not leave:
         for i in data:
             print(route_index, '-', i[0], 'being an', i[4], 'country, with an average revenue per travel of $', i[3], 'traveling', i[1] , 'times and with a total revenue of $', i[2])
             route_index += 1
+
+    # Change the flag 'leave' to true so, the while and the program finish
     elif options == '4':
         leave = True
+
     else:
         print('You choose a wrong option\n')
